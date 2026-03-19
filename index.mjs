@@ -1158,9 +1158,9 @@ var CombatHandler = class {
     const monster = this.monsterManager.get(monsterId);
     if (!monster) return null;
     const weaponDamage = stats.minAttack && stats.maxAttack ? randomBetween(stats.minAttack, stats.maxAttack) : 0;
-    const physical = Math.floor((stats.str ?? 0) * 0.8 + (stats.dex ?? 0) * 0.4) + weaponDamage;
+    const physical = Math.floor((stats.str ?? 0) * 0.5 + (stats.dex ?? 0) * 0.25) + weaponDamage;
     const magical = Math.floor(
-      (stats.int ?? 0) * 1.1 + (stats.spellPower ?? 0) * 1.5
+      (stats.int ?? 0) * 0.7 + (stats.spellPower ?? 0) * 1
     );
     const baseDamage = Math.max(physical, magical);
     const levelDiff = (stats.level ?? 1) - monster.level;
@@ -1171,7 +1171,7 @@ var CombatHandler = class {
       (stats.critRate ?? 0) / 100 + (stats.dex ?? 0) * 3e-3
     );
     const isCrit = Math.random() < critChance;
-    const critMul = isCrit ? 1.5 + Math.random() * 0.5 : 1;
+    const critMul = isCrit ? 1.3 + Math.random() * 0.3 : 1;
     const variance = 0.85 + Math.random() * 0.3;
     const damage = Math.max(
       1,
@@ -2010,30 +2010,30 @@ var SPAWN_LAYOUTS = [
     mapId: "speakingIsland",
     monsterId: "slime_boss",
     count: 1,
-    minX: 1600,
-    maxX: 1900,
-    minY: 300,
-    maxY: 500,
+    minX: 2400,
+    maxX: 2700,
+    minY: 800,
+    maxY: 1e3,
     radius: 60
   },
   {
     mapId: "speakingIsland",
     monsterId: "goblin_boss",
     count: 1,
-    minX: 1700,
-    maxX: 2e3,
-    minY: 700,
-    maxY: 900,
+    minX: 2600,
+    maxX: 2900,
+    minY: 1100,
+    maxY: 1400,
     radius: 60
   },
   {
     mapId: "speakingIsland",
     monsterId: "skeleton_boss",
     count: 1,
-    minX: 2400,
-    maxX: 2700,
-    minY: 400,
-    maxY: 700,
+    minX: 2800,
+    maxX: 3100,
+    minY: 200,
+    maxY: 500,
     radius: 70
   },
   {
@@ -2830,7 +2830,8 @@ function createGameServer(server2) {
         activeTarget.session.exp = Math.max(0, activeTarget.session.exp - expLost);
         activeTarget.session.hp = getDerivedMaxHp(activeTarget.session);
         activeTarget.session.mp = getDerivedMaxMp(activeTarget.session);
-        io.to(activeTarget.presence.id).emit("player:death", { expLost });
+        activeTarget.session.mapId = "speakingIsland";
+        io.to(activeTarget.presence.id).emit("player:death", { expLost, respawnMapId: "speakingIsland" });
         const returned = monsters.returnHome(monster.id);
         if (returned) {
           io.to(monster.mapId).emit("monster:updated", returned);
@@ -3278,12 +3279,12 @@ function getCombatProfile(session) {
 function getAttackCooldown(session) {
   const weapon = session.equipment.weapon ? ITEMS[session.equipment.weapon.id] : null;
   if (weapon?.subtype === "bow" /* BOW */) {
-    return 900;
+    return 1600;
   }
   if (weapon?.subtype === "staff" /* STAFF */) {
-    return 1050;
+    return 1800;
   }
-  return 760;
+  return 1400;
 }
 function getEquipSlot(itemId, equipment) {
   const item = ITEMS[itemId];
