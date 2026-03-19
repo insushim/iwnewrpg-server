@@ -1,0 +1,9 @@
+{
+  "install": "npm install",
+  "start": "node index.mjs",
+  "watch": {
+    "restart": {
+      "include": ["index.mjs"]
+    }
+  }
+}
