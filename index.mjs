@@ -574,6 +574,19 @@ var ITEMS = {
     price: 300,
     maxStack: 50
   },
+  frenzy_elixir: {
+    id: "frenzy_elixir",
+    name: "\uAD11\uC804\uC0AC\uC758 \uACA9\uB178 \uC5D8\uB9AD\uC11C",
+    type: "consumable" /* CONSUMABLE */,
+    rarity: "rare" /* RARE */,
+    stats: { attackSpeedTier: 3, moveSpeedPercent: 50 },
+    weight: 3,
+    stackable: true,
+    description: "\uADFC\uC811 \uC804\uC6A9. 50\uCD08\uAC04 \uACF5\uACA9/\uC774\uB3D9 \uC18D\uB3C4 \uB300\uD3ED \uC99D\uAC00. \uB2E4\uB978 \uBC84\uD504\uC640 \uC911\uCCA9 \uAC00\uB2A5.",
+    icon: "potion_red_rare",
+    price: 800,
+    maxStack: 20
+  },
   // ═══ SCROLLS ═══
   armor_enchant_scroll: {
     id: "armor_enchant_scroll",
