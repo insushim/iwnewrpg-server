@@ -3098,6 +3098,16 @@ function createGameServer(server2) {
       removeInventoryItem(session, payload.itemId, 1);
       session.hp = Math.min(getDerivedMaxHp(session), session.hp + (itemData.stats.hp ?? 0));
       session.mp = Math.min(getDerivedMaxMp(session), session.mp + (itemData.stats.mp ?? 0));
+      if (payload.itemId === "teleport_scroll") {
+        const mapData = MAPS[session.mapId];
+        if (mapData) {
+          const mapW = (mapData.width ?? 30) * (mapData.tileSize ?? 48);
+          const mapH = (mapData.height ?? 30) * (mapData.tileSize ?? 48);
+        }
+      }
+      if (payload.itemId === "return_scroll") {
+        session.mapId = "speakingIsland";
+      }
       socket.emit("player:state", serializePlayerState(session));
     });
     socket.on("inventory:equip", (payload) => {
