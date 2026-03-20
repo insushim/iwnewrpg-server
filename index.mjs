@@ -548,6 +548,32 @@ var ITEMS = {
     maxStack: 10,
     tags: ["exp_boost_50_30s"]
   },
+  berserk_potion: {
+    id: "berserk_potion",
+    name: "\uC804\uC0AC\uC758 \uAD11\uAE30 \uBB3C\uC57D",
+    type: "consumable" /* CONSUMABLE */,
+    rarity: "uncommon" /* UNCOMMON */,
+    stats: { attackSpeedTier: 2 },
+    weight: 2,
+    stackable: true,
+    description: "30\uCD08\uAC04 \uACF5\uACA9 \uC18D\uB3C4\uAC00 40% \uC99D\uAC00\uD569\uB2C8\uB2E4.",
+    icon: "potion_red_rare",
+    price: 300,
+    maxStack: 50
+  },
+  wind_potion: {
+    id: "wind_potion",
+    name: "\uC9C8\uD48D\uC758 \uBB3C\uC57D",
+    type: "consumable" /* CONSUMABLE */,
+    rarity: "uncommon" /* UNCOMMON */,
+    stats: { moveSpeedPercent: 40 },
+    weight: 2,
+    stackable: true,
+    description: "30\uCD08\uAC04 \uC774\uB3D9 \uC18D\uB3C4\uAC00 40% \uC99D\uAC00\uD569\uB2C8\uB2E4.",
+    icon: "potion_green_rare",
+    price: 300,
+    maxStack: 50
+  },
   // ═══ SCROLLS ═══
   armor_enchant_scroll: {
     id: "armor_enchant_scroll",
